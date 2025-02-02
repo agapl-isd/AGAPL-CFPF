@@ -3,7 +3,7 @@ const cors = require("cors");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const app = express();
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
@@ -30,7 +30,6 @@ async function run() {
       .db("cfpfCollection")
       .collection("customerData");
     const rangeCollection = client.db("cfpfCollection").collection("rangeData");
-
 
     // const calculationCollection = client.db("cfpfCollection").collection("calculationCollection");
 
@@ -100,7 +99,7 @@ async function run() {
 
     app.get("/customerRangeData", async (req, res) => {
       const { customerCode, start, end } = req.query;
-      
+
       if (!customerCode || !start || !end) {
         return res.status(400).json({ error: "Missing required parameters" });
       }
@@ -124,8 +123,6 @@ async function run() {
         res.status(500).json({ error: "Internal server error" });
       }
     });
-
-  
 
     app.patch("/addCustomersData", async (req, res) => {
       const {
@@ -156,6 +153,27 @@ async function run() {
         boiler_stocks_value,
         third_boiler_stocks_value,
         farmer_commision,
+        Loss_Boiler_Sale_Price_1,
+        Loss_Boiler_Sale_Price_2,
+        Loss_Boiler_Sale_Price_3,
+        Loss_Boiler_Sale_Price_4,
+        Loss_Boiler_Sale_Price_5,
+        Loss_Boiler_Sale_KG_1,
+        Loss_Boiler_Sale_KG_2,
+        Loss_Boiler_Sale_KG_3,
+        Loss_Boiler_Sale_KG_4,
+        Loss_Boiler_Sale_KG_5,
+
+      Profit_Boiler_Sale_Price_1,
+      Profit_Boiler_Sale_Price_2,
+      Profit_Boiler_Sale_Price_3,
+      Profit_Boiler_Sale_Price_4,
+      Profit_Boiler_Sale_Price_5,
+      Profit_Boiler_Sale_KG_1,
+      Profit_Boiler_Sale_KG_2,
+      Profit_Boiler_Sale_KG_3,
+      Profit_Boiler_Sale_KG_4,
+      Profit_Boiler_Sale_KG_5,
       } = req.body;
       console.log(req.body);
 
@@ -214,38 +232,48 @@ async function run() {
             contract_farmer_commision:
               contract_farmer_commision ||
               existingDocument?.contract_farmer_commision,
-              
-              ageofchicksday:
-              ageofchicksday ||
-              existingDocument?.ageofchicksday,
-              
-              doc:
-              doc ||
-              existingDocument?.doc,
-              
-              feed_sales_value:
-              feed_sales_value ||
-              existingDocument?.feed_sales_value,
-             
-              doc_sales_value:
-              doc_sales_value ||
-              existingDocument?.doc_sales_value,
-            
-            
-              boiler_stocks_value:
-              boiler_stocks_value ||
-              existingDocument?.boiler_stocks_value,
-           
-           
-              third_boiler_stocks_value:
+
+            ageofchicksday: ageofchicksday || existingDocument?.ageofchicksday,
+
+            doc: doc || existingDocument?.doc,
+
+            feed_sales_value:
+              feed_sales_value || existingDocument?.feed_sales_value,
+
+            doc_sales_value:
+              doc_sales_value || existingDocument?.doc_sales_value,
+
+            boiler_stocks_value:
+              boiler_stocks_value || existingDocument?.boiler_stocks_value,
+
+            third_boiler_stocks_value:
               third_boiler_stocks_value ||
               existingDocument?.third_boiler_stocks_value,
-            
-            
-              farmer_commision:
-              farmer_commision ||
-              existingDocument?.farmer_commision,
 
+            farmer_commision:
+              farmer_commision || existingDocument?.farmer_commision,
+              Loss_Boiler_Sale_Price_1:Loss_Boiler_Sale_Price_1 || existingDocument?.Loss_Boiler_Sale_Price_1,
+              Loss_Boiler_Sale_Price_2:Loss_Boiler_Sale_Price_2 || existingDocument?.Loss_Boiler_Sale_Price_2,
+              Loss_Boiler_Sale_Price_3:Loss_Boiler_Sale_Price_3 || existingDocument?.Loss_Boiler_Sale_Price_3,
+              Loss_Boiler_Sale_Price_4:Loss_Boiler_Sale_Price_4 || existingDocument?.Loss_Boiler_Sale_Price_4,
+              Loss_Boiler_Sale_Price_5:Loss_Boiler_Sale_Price_5 || existingDocument?.Loss_Boiler_Sale_Price_5,
+              Loss_Boiler_Sale_KG_1:Loss_Boiler_Sale_KG_1 || existingDocument?.Loss_Boiler_Sale_KG_1,
+              Loss_Boiler_Sale_KG_2:Loss_Boiler_Sale_KG_2 || existingDocument?.Loss_Boiler_Sale_KG_2,
+              Loss_Boiler_Sale_KG_3:Loss_Boiler_Sale_KG_3 || existingDocument?.Loss_Boiler_Sale_KG_3,
+              Loss_Boiler_Sale_KG_4:Loss_Boiler_Sale_KG_4 || existingDocument?.Loss_Boiler_Sale_KG_4,
+              Loss_Boiler_Sale_KG_5:Loss_Boiler_Sale_KG_5 || existingDocument?.Loss_Boiler_Sale_KG_5,
+
+              Profit_Boiler_Sale_Price_1:Profit_Boiler_Sale_Price_1 || existingDocument?.Profit_Boiler_Sale_Price_1,
+              Profit_Boiler_Sale_Price_2:Profit_Boiler_Sale_Price_2 || existingDocument?.Profit_Boiler_Sale_Price_2,
+              Profit_Boiler_Sale_Price_3:Profit_Boiler_Sale_Price_3 || existingDocument?.Profit_Boiler_Sale_Price_3,
+              Profit_Boiler_Sale_Price_4:Profit_Boiler_Sale_Price_4 || existingDocument?.Profit_Boiler_Sale_Price_4,
+              Profit_Boiler_Sale_Price_5:Profit_Boiler_Sale_Price_5 || existingDocument?.Profit_Boiler_Sale_Price_5,
+              Profit_Boiler_Sale_KG_1:Profit_Boiler_Sale_KG_1 || existingDocument?.Profit_Boiler_Sale_KG_1,
+              Profit_Boiler_Sale_KG_2:Profit_Boiler_Sale_KG_2 || existingDocument?.Profit_Boiler_Sale_KG_2,
+              Profit_Boiler_Sale_KG_3:Profit_Boiler_Sale_KG_3 || existingDocument?.Profit_Boiler_Sale_KG_3,
+              Profit_Boiler_Sale_KG_4:Profit_Boiler_Sale_KG_4 || existingDocument?.Profit_Boiler_Sale_KG_4,
+              Profit_Boiler_Sale_KG_5:Profit_Boiler_Sale_KG_5 || existingDocument?.Profit_Boiler_Sale_KG_5,
+              
           },
         };
 
@@ -273,7 +301,6 @@ async function run() {
       }
     });
 
-
     app.patch("/addCustomersDataCalculation", async (req, res) => {
       const {
         customerName,
@@ -290,7 +317,6 @@ async function run() {
         farmer_commision,
       } = req.body;
       console.log(req.body);
-
 
       const query = {
         customerCode: Number(customerCode),
@@ -310,45 +336,30 @@ async function run() {
           $set: {
             customerName: customerName || existingDocument?.customerName,
 
-            
             fcr: fcr || existingDocument?.fcr,
             contract_farmer_commision:
               contract_farmer_commision ||
               existingDocument?.contract_farmer_commision,
-              
-              ageofchicksday:
-              ageofchicksday ||
-              existingDocument?.ageofchicksday,
-              
-              doc:
-              doc ||
-              existingDocument?.doc,
-              
-              feed_sales_value:
-              feed_sales_value ||
-              existingDocument?.feed_sales_value,
-             
-              doc_sales_value:
-              doc_sales_value ||
-              existingDocument?.doc_sales_value,
-            
-            
-              boiler_stocks_value:
-              boiler_stocks_value ||
-              existingDocument?.boiler_stocks_value,
-           
-           
-              third_boiler_stocks_value:
+
+            ageofchicksday: ageofchicksday || existingDocument?.ageofchicksday,
+
+            doc: doc || existingDocument?.doc,
+
+            feed_sales_value:
+              feed_sales_value || existingDocument?.feed_sales_value,
+
+            doc_sales_value:
+              doc_sales_value || existingDocument?.doc_sales_value,
+
+            boiler_stocks_value:
+              boiler_stocks_value || existingDocument?.boiler_stocks_value,
+
+            third_boiler_stocks_value:
               third_boiler_stocks_value ||
               existingDocument?.third_boiler_stocks_value,
-            
-            
-              farmer_commision:
-              farmer_commision ||
-              existingDocument?.farmer_commision,
 
-
-
+            farmer_commision:
+              farmer_commision || existingDocument?.farmer_commision,
           },
         };
 
@@ -423,6 +434,6 @@ app.get("/", (req, res) => {
   res.send("Server is running");
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on PORT: ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
